@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block main %}
+<h2>お気に入り一覧</h2>
+<form action="" method="POST">
+    
+    <table>
+        <tr>
+            <th class="5" width="50" height="10"></th>
+            <th class="4" width="130" height="10">登録日</th>
+            <th class="1" width="700" height="10">商品名</th>
+            <th class="2" width="150" height="10">価格</th>
+            <th class="3" width="100" height="10">URL</th>
+
+        </tr>
+        {% for fav in object_list %}
+        <tr>
+            <td><input type="checkbox" name="delete" value="{{ fav.pk }}"></td>
+            <td class="4" width="130" height="10">{{fav.created}}</td>
+            <td width="700" height="10">{{fav.name}}</td>
+            <td width="150" height="20">{{fav.price}}</td>
+            <td width="100" height="10"><a href={{fav.url}}>リンク</a></td>
+
+        </tr>
+        {% endfor %}
+        {% csrf_token %}
+    </table>
+    <button type="submit">削除</button>
+</form>
+<a href="{% url '' %}">TOPへ</a>
+{% endblock %}

@@ -1,0 +1,5 @@
+django
+whitenoise
+gunicorn
+requests
+bs4

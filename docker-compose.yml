@@ -1,0 +1,27 @@
+version: '3.8'
+
+volumes:
+  db-data:
+
+
+services:
+  web:
+    build: .
+    volumes:
+      - '.:/docker'
+    command: python manage.py runserver 0.0.0.0:8000
+    ports:
+      - 8000:8000
+    depends_on:        #追加
+      - db             #追加
+    links:
+      - db
+
+  db:                  #追加
+    image: postgres:11 #追加
+    volumes:
+      - 'db-data:/var/lib/postgresql/data'
+    environment:
+      - 'POSTGRES_USER=postgres'
+      - 'POSTGRES_PASSWORD=postgres'
+      - 'POSTGRES_HOST_AUTH_METHOD=trust'
